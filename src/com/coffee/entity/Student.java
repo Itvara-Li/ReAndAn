@@ -1,5 +1,6 @@
 package com.coffee.entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 public class Student
 {
@@ -8,6 +9,9 @@ public class Student
 	public Boolean sex;
 	public String phone;
 	public Date birthday;
+	//Timestamp
+	
+	
 	public  Student() {
 		
 	}
@@ -57,6 +61,11 @@ public class Student
 	public void setBirthday(Date birthday)
 	{
 		this.birthday = birthday;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", sex=" + sex
+				+ ", phone=" + phone + ", birthday=" + birthday + "]";
 	}
 	
 
