@@ -1,4 +1,4 @@
-package com.coffee.a05;
+package com.coffee.reflect.util;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -12,10 +12,14 @@ import javax.management.RuntimeErrorException;
 
 import org.json.JSONObject;
 
-import com.coffee.reflect.util.ReflectUtil;
+import com.coffee.annotation.FieldInfo;
+/**
+ * 注解与框架设计
+ * @author coffeeliu
+ *
+ */
 
-
-public class JSONutil {
+public class JSONUtil {
    public static JSONObject pojo2JSON(Object obj) throws Exception {
 	  Class cls=obj.getClass();
 	Field[] fields=cls.getDeclaredFields();
@@ -26,14 +30,23 @@ public class JSONutil {
 		Method getter=cls.getDeclaredMethod(getterName);
 		Object value=getter.invoke(obj);
 		if (value instanceof Date) {
-			SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd");
-			String dateString=sDateFormat.format(value);
-			value=dateString;
+			String format="yyyy-MM-dd";
+			if (f.isAnnotationPresent(FieldInfo.class)) {
+				FieldInfo an=f.getAnnotation(FieldInfo.class);
+				format=an.format();
+			}
+			SimpleDateFormat dateString=new SimpleDateFormat(format);
+			value=dateString.format(value);
 		}
 		if (value instanceof Timestamp) {
-			SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			String dateString=sDateFormat.format(value);
-			value=dateString;
+			String format="yyyy-MM-dd HH:mm:ss";
+			if (f.isAnnotationPresent(FieldInfo.class)) {
+				FieldInfo an=f.getAnnotation(FieldInfo.class);
+				format=an.format();
+			}
+			SimpleDateFormat dateString=new SimpleDateFormat(format);
+			value=dateString.format(value);
+			
 		}
 		if (value!=null) {
 			json.put(name, value);

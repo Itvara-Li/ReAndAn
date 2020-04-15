@@ -2,12 +2,21 @@ package com.coffee.entity;
 
 import java.sql.Timestamp;
 import java.util.Date;
+
+import com.coffee.annotation.Example;
+import com.coffee.annotation.FieldInfo;
+import com.coffee.annotation.TableInfo;
+
+@TableInfo(name = "student")
 public class Student
 {
 	public Integer id;   
 	public String name;
 	public Boolean sex;
 	public String phone;
+	
+	//@Example(name="liuwei")
+	@FieldInfo(format = "yyyy年MM月dd日")
 	public Date birthday;
 	//Timestamp
 	
