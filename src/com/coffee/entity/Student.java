@@ -7,12 +7,12 @@ import com.coffee.annotation.Example;
 import com.coffee.annotation.FieldInfo;
 import com.coffee.annotation.TableInfo;
 
-@TableInfo(name = "student")
+@TableInfo(name="student")
 public class Student
 {
 	public Integer id;   
 	public String name;
-	public Boolean sex;
+	public Boolean sex;//null
 	public String phone;
 	
 	//@Example(name="liuwei")
@@ -31,6 +31,8 @@ public class Student
 		this.sex = sex;
 		this.phone = phone;
 	}
+	
+	
 	public Integer getId()
 	{
 		return id;

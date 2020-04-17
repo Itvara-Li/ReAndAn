@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import java.util.Date;
 
 import org.json.JSONObject;
-
+import com.coffee.annotation.TableInfo;
 import com.coffee.entity.Student;
 import com.coffee.reflect.util.ReflectUtil;
 
@@ -23,7 +23,6 @@ public class test2 {
 	    	
 	     System.out.println(ss);
 }
- 
  public static String insertSQL(Object pojo) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 	 
 	    Class cls=pojo.getClass();
@@ -48,7 +47,11 @@ public class test2 {
 		}
 		}	
 	     String tableName=" 表名";
-	     String sql="insert into"+tableName+" (";
+	     if (cls.isAnnotationPresent(TableInfo.class)) {
+	    	 TableInfo tableInfo=(TableInfo) cls.getAnnotation(TableInfo.class);
+	    	 tableName=tableInfo.name();	
+			}
+	     String sql="insert into "+tableName+" (";
 	     for (int i = 0; i < len; i++) {
 			sql+=names[i];
 		 if(i<len-1)sql+=",";
@@ -64,4 +67,6 @@ public class test2 {
 
 	
 }
+ 
+ 
 }

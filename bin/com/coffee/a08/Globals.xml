@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+     <global name="car" class="com.coffee.a08.Car" init="getReady"/>
+
+<global name="plane" class="com.coffee.a08.Plane"/>
+<global name="train" class="com.coffee.a08.Train"/>
+</config>
